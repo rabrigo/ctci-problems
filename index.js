@@ -19,7 +19,86 @@ function uniqueOnly(input) {
     return true;
 }
 
-console.log(uniqueOnly('a'));
-console.log(uniqueOnly('ab'));
-console.log(uniqueOnly('abb'));
-console.log(uniqueOnly('ababab'));
+// console.log(uniqueOnly('a'));
+// console.log(uniqueOnly('ab'));
+// console.log(uniqueOnly('abb'));
+// console.log(uniqueOnly('ababab'));
+
+// 1.2
+
+function perMutations(string1, string2) {
+    if (string1.length != string2.length) {
+        return false;
+    }
+    string1 = string1.split('').sort().join('');
+    string2 = string2.split('').sort().join('');
+    for (let i = 0; i < string1.length; i++) {
+        if (string1[i] != string2[i]) {
+            return false;
+        }
+    }
+    return true;
+}
+
+// console.log(perMutations('abc', 'cab'));
+// console.log(perMutations('abc', 'cabb'));
+// console.log(perMutations('ab c', 'cab '));
+
+// 1.3 
+
+function urlify (input, count) {
+    input = input.split(' ');
+    // console.log(input);
+    return(input.join('%20').slice(0, count));
+}
+
+// console.log(urlify('space dogzzzz', 8))
+
+// 1.4
+
+function permOfPal(input) {
+    // if string length is even each char must repeat
+    // if odd then all char but one must repeat
+
+    // for loop taking each character and putting into hashtable
+    // add to key if already exists
+    // if string length is even make sure each key is > 1
+    // if odd then one character is 1
+    const char = {};
+    for (let i = 0; i < input.length; i++) {
+        if (char.hasOwnProperty(input[i])) {
+            char[input[i]] += 1;
+        } else {
+            char[input[i]] = 1;
+        }
+    }
+    if (input.length % 2 == 0) {
+        for (const i in char) {
+            if (char[i] === 1) {
+                return false;
+            }
+        }
+    } 
+    return true;
+}
+
+// function palCheck(input) {
+//     for (let i = 0; i < input.length / 2; i++) {
+//         // if (input.length % 2 == 0) {
+//         //     if (input[i] != input[(input.length - 1) - i]) {
+//         //         return false;
+//         //     } 
+//         // } else {
+
+//         // }
+//         if (input[i] != input[(input.length - 1) - i]) {
+//             return false;
+//         } 
+//     }
+//     return true;
+// }
+
+// console.log(permOfPal('tact coa'));
+// console.log(palCheck('baaaab'));
+// console.log(palCheck('tacocat'));
+console.log(permOfPal('abcacd'));
