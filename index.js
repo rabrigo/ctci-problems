@@ -174,5 +174,32 @@ function mapConvert(hashMap, string) {
     } else { return output };
 }
 
-console.log(hashString('aaabcccc')); // returns compressed string
-console.log(hashString('abc')); // returns original
+// console.log(hashString('aaabcccc')); // returns compressed string
+// console.log(hashString('abc')); // returns original
+
+// 1.7
+// an image is a matrix N x N
+// each pixel is 4 bites (ex: 0110)
+// write a method that rotates it by 90 degrees
+// can you rotate in place?
+
+// 0001
+// 0110
+// 1111
+// 1101
+// 0000
+// 1011
+
+// rotated 90 degrees:
+
+// 101100
+// 001110
+// 100110
+// 101101
+
+// confirm that inputs can only be arrays with 1s and 0s
+// also indices can only be strings 4 numbers long
+
+// go through indices' first value and then add that to first row
+// do the same for the second row and so on
+
