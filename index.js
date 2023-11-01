@@ -78,7 +78,16 @@ function permOfPal(input) {
                 return false;
             }
         }
-    } 
+    } else {
+        let middle = 0;
+        for (const i in char) {
+            if (char[i] === 1) {
+                middle++;
+            }
+        }
+        if (middle > 1) {return false};
+    }
+    console.log(char);
     return true;
 }
 
@@ -101,4 +110,39 @@ function permOfPal(input) {
 // console.log(permOfPal('tact coa'));
 // console.log(palCheck('baaaab'));
 // console.log(palCheck('tacocat'));
-console.log(permOfPal('abcacd'));
+// console.log(permOfPal('abcacd')); // false
+// console.log(permOfPal('abcabc')); // true
+// console.log(permOfPal('abbddbac')); // true
+// console.log(permOfPal('tcao act')); // true
+
+// 1.5
+
+// check if two inputs are within 1 edit of each other
+// 'edits' include removing character, changing, or adding
+
+function oneEdit(string1, string2) {
+    string1 = string1.split('').sort().join('');
+    string2 = string2.split('').sort().join('');
+    let edits = 0;
+    if (string2.length > string1.length) {    
+        for (const i in string2) {
+            if (string1[i] != string2[i]) {
+                edits++;
+            }
+        }
+    } else {
+        for (const i in string1) {
+            if (string1[i] != string2[i]) {
+                edits++;
+            }
+        }
+    }
+    if (edits <= 1) {
+        return true;
+    } else { return false };
+}
+
+console.log(oneEdit('abc', 'abcd')); // true
+console.log(oneEdit('abc', 'abc')); // true
+console.log(oneEdit('abcd', 'abc')); // true
+console.log(oneEdit('abcdd', 'abc')); // false
