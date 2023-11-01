@@ -142,7 +142,37 @@ function oneEdit(string1, string2) {
     } else { return false };
 }
 
-console.log(oneEdit('abc', 'abcd')); // true
-console.log(oneEdit('abc', 'abc')); // true
-console.log(oneEdit('abcd', 'abc')); // true
-console.log(oneEdit('abcdd', 'abc')); // false
+// console.log(oneEdit('abc', 'abcd')); // true
+// console.log(oneEdit('abc', 'abc')); // true
+// console.log(oneEdit('abcd', 'abc')); // true
+// console.log(oneEdit('abcdd', 'abc')); // false
+
+// 1.6
+
+function hashString(input) {
+    const letterCount = {};
+    for (let i = 0; i < input.length; i++) {
+        if (letterCount.hasOwnProperty(input[i])) {
+            letterCount[input[i]] += 1;
+        } else {
+            letterCount[input[i]] = 1;
+        }
+    }
+    // return letterCount;
+    return mapConvert(letterCount, input)
+}
+
+function mapConvert(hashMap, string) {
+    let output = '';
+    // console.log(hashMap);
+    for (let char in hashMap) {
+        output = output.concat(`${char}${hashMap[char]}`)
+    }
+    // console.log(output);
+    if (output.length > string.length) {
+        return string
+    } else { return output };
+}
+
+console.log(hashString('aaabcccc')); // returns compressed string
+console.log(hashString('abc')); // returns original
