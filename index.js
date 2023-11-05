@@ -7,11 +7,11 @@ function uniqueOnly(input) {
     if (letters.length == 1) {
         return true
     };
-    for (let i = 0; i < letters.length; i++) {
-        // console.log(i);
-        if (i > 0) {
-            if (letters[i] == letters[i-1]) {
-                // console.log(letters[i]);
+    for (let j = 0; j < letters.length; j++) {
+        // console.log(j);
+        if (j > 0) {
+            if (letters[j] == letters[j-1]) {
+                // console.log(letters[j]);
                 return false;
             }
         }
@@ -32,8 +32,8 @@ function perMutations(string1, string2) {
     }
     string1 = string1.split('').sort().join('');
     string2 = string2.split('').sort().join('');
-    for (let i = 0; i < string1.length; i++) {
-        if (string1[i] != string2[i]) {
+    for (let j = 0; j < string1.length; j++) {
+        if (string1[j] != string2[j]) {
             return false;
         }
     }
@@ -65,23 +65,23 @@ function permOfPal(input) {
     // if string length is even make sure each key is > 1
     // if odd then one character is 1
     const char = {};
-    for (let i = 0; i < input.length; i++) {
-        if (char.hasOwnProperty(input[i])) {
-            char[input[i]] += 1;
+    for (let j = 0; j < input.length; j++) {
+        if (char.hasOwnProperty(input[j])) {
+            char[input[j]] += 1;
         } else {
-            char[input[i]] = 1;
+            char[input[j]] = 1;
         }
     }
     if (input.length % 2 == 0) {
-        for (const i in char) {
-            if (char[i] === 1) {
+        for (const j in char) {
+            if (char[j] === 1) {
                 return false;
             }
         }
     } else {
         let middle = 0;
-        for (const i in char) {
-            if (char[i] === 1) {
+        for (const j in char) {
+            if (char[j] === 1) {
                 middle++;
             }
         }
@@ -92,15 +92,15 @@ function permOfPal(input) {
 }
 
 // function palCheck(input) {
-//     for (let i = 0; i < input.length / 2; i++) {
+//     for (let j = 0; j < input.length / 2; j++) {
 //         // if (input.length % 2 == 0) {
-//         //     if (input[i] != input[(input.length - 1) - i]) {
+//         //     if (input[j] != input[(input.length - 1) - j]) {
 //         //         return false;
 //         //     } 
 //         // } else {
 
 //         // }
-//         if (input[i] != input[(input.length - 1) - i]) {
+//         if (input[j] != input[(input.length - 1) - j]) {
 //             return false;
 //         } 
 //     }
@@ -125,14 +125,14 @@ function oneEdit(string1, string2) {
     string2 = string2.split('').sort().join('');
     let edits = 0;
     if (string2.length > string1.length) {    
-        for (const i in string2) {
-            if (string1[i] != string2[i]) {
+        for (const j in string2) {
+            if (string1[j] != string2[j]) {
                 edits++;
             }
         }
     } else {
-        for (const i in string1) {
-            if (string1[i] != string2[i]) {
+        for (const j in string1) {
+            if (string1[j] != string2[j]) {
                 edits++;
             }
         }
@@ -151,11 +151,11 @@ function oneEdit(string1, string2) {
 
 function hashString(input) {
     const letterCount = {};
-    for (let i = 0; i < input.length; i++) {
-        if (letterCount.hasOwnProperty(input[i])) {
-            letterCount[input[i]] += 1;
+    for (let j = 0; j < input.length; j++) {
+        if (letterCount.hasOwnProperty(input[j])) {
+            letterCount[input[j]] += 1;
         } else {
-            letterCount[input[i]] = 1;
+            letterCount[input[j]] = 1;
         }
     }
     // return letterCount;
@@ -190,7 +190,7 @@ function mapConvert(hashMap, string) {
 // 0000
 // 1011
 
-// rotated 90 degrees:
+// rotated 90 degrees CW:
 
 // 101100
 // 001110
@@ -202,4 +202,37 @@ function mapConvert(hashMap, string) {
 
 // go through indices' first value and then add that to first row
 // do the same for the second row and so on
+
+function rotatePic(pic) {
+    const rotated = [];
+    // take the bottom left corner and place it into the top left
+    // take the first bit of the middle array and put it into the second index of first array
+    for (let i = 0; i < pic[0].length; i++) {
+        // start with first column of pixels
+        const row = [];
+        for (let j = pic.length - 1; j >= 0; j--) {
+            // start with bottom pixel
+            row.push(pic[j][i]);
+        }
+        // after a row of pixels have been mapped
+        // add it to our output
+        rotated.push(row);
+    }
+    return rotated;
+}
+
+const image = 
+[
+    [1, 1, 0, 1],
+    [0, 0, 0, 0],
+    [1, 1, 1, 1]
+]
+
+// rotated should look like
+// 1, 0, 1
+// 1, 0, 1
+// 1, 0, 0
+// 1, 0, 1
+
+console.log(rotatePic(image));
 
